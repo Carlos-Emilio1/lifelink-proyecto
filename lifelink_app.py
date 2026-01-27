@@ -21,7 +21,7 @@ cloudinary.config(
 )
 
 # ==========================================
-# 1. PLANTILLAS HTML (UI PROFESIONAL Y FUNCIONALIDADES NUEVAS)
+# 1. PLANTILLAS HTML (UI PROFESIONAL Y SEGURIDAD MÉDICA)
 # ==========================================
 
 base_template = """
@@ -141,7 +141,7 @@ home_template = """
                 <div class="relative w-full max-w-md animate-float">
                     <div class="absolute inset-0 bg-brand rounded-[3rem] rotate-6 opacity-10"></div>
                     <div class="relative bg-white p-4 rounded-[3rem] shadow-2xl border-8 border-slate-50">
-                        <img class="w-full h-[500px] rounded-[2rem] object-cover" src="https://images.unsplash.com/photo-1551076805-e1869033e561?q=80&w=1000&auto=format&fit=crop" alt="LifeLink Medical">
+                        <img class="w-full h-[500px] rounded-[2rem] object-cover shadow-inner" src="https://images.unsplash.com/photo-1576091160550-2173bdb999ef?q=80&w=1000&auto=format&fit=crop" alt="LifeLink Medical">
                     </div>
                 </div>
             </div>
@@ -277,48 +277,97 @@ soporte_template = """
 {% block content %}
 <div class="max-w-5xl mx-auto py-16 px-4">
     <div class="text-center mb-16">
-        <h2 class="text-5xl font-black text-slate-900 mb-6">Modelo y Legalidad</h2>
-        <p class="text-slate-500 max-w-2xl mx-auto">LifeLink no es solo una página, es un ecosistema regulado por TechPulse para garantizar seguridad médica.</p>
+        <h2 class="text-5xl font-black text-slate-900 mb-6">Modelo de Negocio y Ética</h2>
+        <p class="text-slate-500 max-w-2xl mx-auto">LifeLink es un ecosistema autosustentable diseñado por TechPulse para garantizar seguridad médica y viabilidad comercial.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
         <div class="bg-white p-10 rounded-[2.5rem] shadow-xl border border-slate-50">
             <h3 class="text-2xl font-black text-slate-800 mb-6 flex items-center gap-2">
-                <i class="fas fa-coins text-amber-500"></i> ¿Cómo ganamos dinero?
+                <i class="fas fa-coins text-amber-500"></i> ¿Cómo es rentable?
             </h3>
-            <ul class="space-y-4 text-sm text-slate-600">
-                <li class="flex items-start gap-3"><i class="fas fa-check text-emerald-500 mt-1"></i> <b>Cuentas Premium:</b> Hospitales y farmacias pagan suscripción para aparecer como "Verificados".</li>
-                <li class="flex items-start gap-3"><i class="fas fa-check text-emerald-500 mt-1"></i> <b>Comisión de Enlace:</b> Por cada venta de equipo ortopédico, LifeLink retiene el 5% para mantenimiento.</li>
-                <li class="flex items-start gap-3"><i class="fas fa-check text-emerald-500 mt-1"></i> <b>Logística:</b> Alianzas con servicios de paquetería médica especializada.</li>
+            <ul class="space-y-6 text-sm text-slate-600">
+                <li class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-amber-50 text-amber-500 flex items-center justify-center shrink-0"><i class="fas fa-hospital"></i></div>
+                    <div><b>Suscripciones B2B:</b> Hospitales y farmacias pagan \$49 USD/mes por la insignia de "Proveedor Verificado" y analíticas de demanda en su zona.</div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-blue-50 text-blue-500 flex items-center justify-center shrink-0"><i class="fas fa-truck-ramp-box"></i></div>
+                    <div><b>Tarifa de Logística:</b> Cobramos un 5% de comisión por gestionar el transporte especializado de equipos médicos costosos (sillas motorizadas, concentradores).</div>
+                </li>
+                <li class="flex items-start gap-3">
+                    <div class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-500 flex items-center justify-center shrink-0"><i class="fas fa-bullhorn"></i></div>
+                    <div><b>Publicidad Nativa:</b> Espacios destacados para laboratorios médicos en las búsquedas relacionadas.</div>
+                </li>
             </ul>
         </div>
 
         <div class="bg-slate-900 p-10 rounded-[2.5rem] shadow-xl text-white">
             <h3 class="text-2xl font-black mb-6 flex items-center gap-2">
-                <i class="fas fa-scale-balanced text-brand"></i> Cumplimiento Legal
+                <i class="fas fa-scale-balanced text-brand"></i> Marco Legal y Bioética
             </h3>
             <div class="space-y-6 text-xs text-slate-400 leading-relaxed">
-                <p><b>PROHIBICIÓN:</b> La Ley General de Salud prohíbe la comercialización de órganos, tejidos y sangre. LifeLink bloquea cualquier intento de venta en estas categorías.</p>
-                <p><b>RECETAS:</b> Para medicamentos controlados, el sistema exige una receta digital que es validada por nuestro equipo de soporte antes de publicar.</p>
-                <p><b>VERIFICACIÓN:</b> Contamos con un sistema de reportes para dar de baja a usuarios que intenten vender productos ilegales o caducos.</p>
+                <p><b>ALTRUISMO OBLIGATORIO:</b> El sistema bloquea automáticamente cualquier intento de venta en la categoría "Sangre". Toda solicitud de este tipo es gratuita por ley y ética médica.</p>
+                <p><b>CONTROL DE RECETAS:</b> Para medicamentos especializados, el sistema exige una receta digital que nuestro equipo de administración valida antes de liberar la publicación.</p>
+                <p><b>DESTINO HOSPITALARIO:</b> La sangre no se entrega a particulares. El receptor debe indicar el **Hospital de Destino** y el sistema genera una orden de compromiso para el banco de sangre correspondiente.</p>
             </div>
         </div>
     </div>
 
     <div class="mt-20 bg-white p-10 rounded-[2.5rem] shadow-2xl border border-blue-50">
-        <h3 class="text-3xl font-black text-slate-900 mb-8 text-center">Hablar con Soporte Humano</h3>
+        <h3 class="text-3xl font-black text-slate-900 mb-8 text-center">Consultoría de Soporte</h3>
         <form action="{{ url_for('enviar_soporte') }}" method="POST" class="max-w-2xl mx-auto space-y-4">
-            <input name="asunto" placeholder="¿En qué podemos ayudarte?" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none border-none">
-            <textarea name="mensaje" placeholder="Describe tu situación..." rows="4" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none border-none"></textarea>
-            <button class="w-full btn-medical py-5 rounded-2xl font-black shadow-lg">Enviar a Revisión</button>
+            <input name="asunto" placeholder="Asunto (Ej: Verificación de Hospital)" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none border-none">
+            <textarea name="mensaje" placeholder="Describe tu necesidad técnica o legal..." rows="4" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none border-none"></textarea>
+            <button class="w-full btn-medical py-5 rounded-2xl font-black shadow-lg">Enviar a Revisión de Admin</button>
         </form>
     </div>
 </div>
 {% endblock %}
 """
 
+checkout_template = """
+{% extends "base.html" %}
+{% block content %}
+<div class="max-w-2xl mx-auto py-20 px-4 text-center">
+    <div class="bg-white p-12 rounded-[2.5rem] shadow-2xl border border-slate-50">
+        <h2 class="text-4xl font-black text-slate-900 mb-8">Confirmar Solicitud</h2>
+        
+        <div class="bg-slate-50 p-6 rounded-3xl mb-8">
+            <img src="{{ pub.imagen_url }}" class="w-48 h-48 rounded-[2rem] object-cover mx-auto mb-4 shadow-md">
+            <h3 class="font-black text-xl">{{ pub.nombre }}</h3>
+            <p class="text-[10px] font-black text-brand uppercase tracking-widest">{{ pub.categoria }}</p>
+        </div>
+
+        {% if pub.categoria == 'Sangre' %}
+        <div class="mb-8 p-4 bg-red-50 border-2 border-red-100 rounded-2xl text-left">
+            <p class="text-[10px] font-black text-red-600 uppercase mb-3"><i class="fas fa-triangle-exclamation"></i> Protocolo de Donación Altruista</p>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Hospital de Destino</label>
+                    <input name="hospital" placeholder="Nombre del Banco de Sangre / Hospital" required class="w-full p-3 bg-white rounded-xl border-none text-sm outline-none focus:ring-2 focus:ring-red-400">
+                </div>
+                {% if current_user.tipo_sangre != pub.nombre.split()[-1] %}
+                <div class="flex items-center gap-3 text-amber-600 text-[10px] font-bold italic bg-amber-50 p-2 rounded-lg">
+                    <i class="fas fa-circle-exclamation"></i> Nota: Tu perfil indica {{ current_user.tipo_sangre }}. Asegúrate de que el receptor sea compatible.
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('procesar_transaccion', id=pub.id_oferta_insumo) }}" method="POST">
+            <input type="hidden" name="motivo" value="Solicitud estándar">
+            <button class="w-full btn-medical py-5 rounded-[2rem] font-black text-2xl shadow-xl hover:shadow-brand/40 transition-all">Confirmar Compromiso</button>
+        </form>
+        <p class="text-[10px] text-slate-400 mt-6"><i class="fas fa-shield-halved mr-1"></i> Transacción protegida por el protocolo LifeLink de TechPulse</p>
+    </div>
+</div>
+{% endblock %}
+"""
+
 # ==========================================
-# 2. CONFIGURACIÓN APP Y MODELOS (PERSISTENCIA)
+# 2. CONFIGURACIÓN APP Y MODELOS
 # ==========================================
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY', 'lifelink_2026_pro_secure')
@@ -353,8 +402,8 @@ class Publicacion(db.Model):
     tipo_publicacion = db.Column(db.String(50))
     precio = db.Column(db.Float, default=0.0)
     imagen_url = db.Column(db.String(500))
-    receta_url = db.Column(db.String(500)) # NUEVO: Para medicamentos
-    direccion_exacta = db.Column(db.String(500)) # NUEVO: Dirección de Nominatim
+    receta_url = db.Column(db.String(500))
+    direccion_exacta = db.Column(db.String(500))
     latitud = db.Column(db.Float)
     longitud = db.Column(db.Float)
     estado = db.Column(db.String(20), default='Disponible')
@@ -365,6 +414,8 @@ class Solicitud(db.Model):
     id_solicitud = db.Column(db.Integer, primary_key=True)
     id_solicitante = db.Column(db.Integer, db.ForeignKey('usuarios.id_usuario'))
     id_publicacion = db.Column(db.Integer, db.ForeignKey('insumos.id_oferta_insumo'))
+    motivo_medico = db.Column(db.String(255))
+    hospital_destino = db.Column(db.String(255))
     solicitante = db.relationship('Usuario', backref='solicitudes_enviadas')
     publicacion = db.relationship('Publicacion', backref='solicitudes_recibidas')
 
@@ -381,15 +432,14 @@ class MensajeSoporte(db.Model):
 app.jinja_loader = jinja2.DictLoader({
     'base.html': base_template,
     'home.html': home_template,
-    'register.html': register_template,
+    'register.html': """{% extends "base.html" %}{% block content %}<div class="max-w-2xl mx-auto py-16 px-4"><div class="bg-white p-10 rounded-[2.5rem] shadow-2xl border border-slate-50"><h2 class="text-4xl font-black text-slate-900 mb-8">Registro Médico</h2><form method="POST" class="space-y-4"><input name="nombre" placeholder="Nombre" required class="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none"><select name="tipo_sangre" required class="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none"><option value="">Sangre</option><option>O+</option><option>O-</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option></select><input name="email" type="email" placeholder="Email" required class="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none"><input name="telefono" placeholder="WhatsApp" required class="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none"><input name="ubicacion" placeholder="Ciudad" required class="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none"><input name="password" type="password" placeholder="Pass" required class="w-full p-4 bg-slate-50 rounded-2xl border-none outline-none"><button class="w-full btn-medical py-5 rounded-2xl font-black text-xl mt-4 shadow-xl">Crear Cuenta</button></form></div></div>{% endblock %}""",
     'soporte.html': soporte_template,
     'publish.html': publish_template,
-    'login.html': """{% extends "base.html" %}{% block content %}<div class="max-w-md mx-auto py-20 px-4"><div class="bg-white p-10 rounded-[2.5rem] shadow-2xl border border-slate-100"><h2 class="text-3xl font-black mb-8 text-center text-slate-800">Bienvenido</h2><form method="POST" class="space-y-4"><input name="email" type="email" placeholder="Email" required class="w-full p-4 bg-slate-50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-brand"><input name="password" type="password" placeholder="Pass" required class="w-full p-4 bg-slate-50 border-none rounded-2xl outline-none focus:ring-2 focus:ring-brand"><button class="w-full btn-medical py-5 rounded-2xl font-black shadow-xl mt-4 transition-all">Ingresar</button></form></div></div>{% endblock %}""",
-    'search.html': """{% extends "base.html" %}{% block content %}<div class="max-w-7xl mx-auto py-10 px-4"><div class="flex flex-col lg:flex-row gap-10"><div class="lg:w-80"><div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 sticky top-24"><h4 class="font-black text-slate-900 mb-6 uppercase tracking-widest text-xs">Buscador Inteligente</h4><form method="GET"><input name="q" placeholder="Ej: Sangre O+..." class="w-full p-3 bg-slate-50 border-none rounded-xl text-sm mb-4 outline-none focus:ring-2 focus:ring-brand"><button class="w-full btn-medical py-3 rounded-xl text-sm font-bold shadow-md">Buscar Ahora</button></form></div></div><div class="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">{% for item in resultados %}<div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden hover:shadow-2xl transition-all group">{% if item.receta_url %}<div class="absolute z-20 top-2 left-2 bg-red-500 text-white text-[8px] px-2 py-1 rounded-full font-bold">RECETA REQUERIDA</div>{% endif %}<img src="{{ item.imagen_url }}" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"><div class="p-6"><h3 class="font-black text-slate-800 text-xl">{{ item.nombre }}</h3><p class="text-[10px] text-brand font-bold uppercase mb-4 tracking-tighter">{{ item.categoria }}</p><div class="flex justify-between items-center"><span class="text-2xl font-black text-slate-900">{% if item.tipo_publicacion == 'Venta' %} ${{ item.precio }} {% else %} GRATIS {% endif %}</span><a href="{{ url_for('confirmar_compra', id=item.id_oferta_insumo) }}" class="w-12 h-12 bg-blue-50 text-brand rounded-2xl flex items-center justify-center hover:bg-brand hover:text-white transition-colors"><i class="fas fa-chevron-right"></i></a></div><p class="text-[9px] text-slate-400 mt-4"><i class="fas fa-location-dot"></i> {{ item.direccion_exacta[:40] }}...</p></div></div>{% endfor %}</div></div></div>{% endblock %}""",
-    'dashboard.html': """{% extends "base.html" %}{% block content %}<div class="max-w-7xl mx-auto py-12 px-4"><div class="flex justify-between items-end mb-12"><h1 class="text-5xl font-black text-slate-900 tracking-tighter">Bienvenido, <span class="text-brand">{{ current_user.nombre.split()[0] }}</span></h1></div><div class="grid grid-cols-1 lg:grid-cols-3 gap-10">{% if current_user.email == 'admin@lifelink.com' %}<div class="lg:col-span-3 bg-red-50 p-10 rounded-[2.5rem] border border-red-100 shadow-sm"><h3 class="text-2xl font-black text-red-700 mb-6 flex items-center gap-2"><i class="fas fa-shield-halved"></i> Panel Administrativo TechPulse</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-6">{% for ticket in tickets_admin %}<div class="bg-white p-6 rounded-3xl shadow-sm"><div><p class="text-[10px] font-black text-red-400 uppercase mb-1">DE: {{ ticket.usuario.nombre }}</p><h5 class="font-black text-slate-800 mb-2">{{ ticket.asunto }}</h5><p class="text-xs text-slate-500 mb-4">{{ ticket.mensaje }}</p></div><a href="mailto:{{ ticket.usuario.email }}" class="bg-brand text-white px-4 py-2 rounded-xl text-xs font-bold">Responder</a></div>{% else %}<p class="text-red-400 italic">No hay mensajes.</p>{% endfor %}</div></div>{% endif %}<div class="lg:col-span-2 space-y-8"><h4 class="text-xs font-black text-slate-400 uppercase tracking-widest">Coordinación en Curso</h4>{% for s in solicitudes_recibidas %}<div class="bg-white p-8 rounded-[2rem] shadow-sm flex justify-between items-center"><div><h5 class="font-black text-slate-800 text-xl">{{ s.publicacion.nombre }}</h5><p class="text-xs text-slate-400">Solicitado por: {{ s.solicitante.nombre }}</p></div><a href="{{ url_for('chat', id_solicitud=s.id_solicitud) }}" class="btn-medical px-6 py-3 rounded-2xl font-black text-sm">Abrir Chat</a></div>{% endfor %}</div></div></div>{% endblock %}""",
-    'chat.html': """{% extends "base.html" %}{% block content %}<div class="max-w-3xl mx-auto py-8 px-4 h-[75vh] flex flex-col"><div class="bg-white rounded-[2.5rem] shadow-2xl flex flex-col flex-1 overflow-hidden border border-slate-100"><div class="bg-brand p-6 text-white flex justify-between items-center"><div class="flex items-center gap-4"><div><h3 class="font-black leading-none italic">LifeLink Secure Line</h3></div></div><a href="{{ url_for('dashboard') }}"><i class="fas fa-times text-xl"></i></a></div><div class="flex-1 overflow-y-auto p-8 space-y-6 bg-slate-50/50" id="chat-box"></div><div class="p-6 bg-white border-t border-slate-100"><form onsubmit="event.preventDefault(); send();" class="flex gap-4"><input id="msg-input" placeholder="Escribe aquí..." class="flex-1 p-4 bg-slate-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-brand"><button class="bg-brand text-white w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg"><i class="fas fa-paper-plane"></i></button></form></div></div></div><script>const socket = io(); const room = "{{ solicitud.id_solicitud }}"; const user = "{{ current_user.nombre }}"; socket.emit('join', {room: room}); socket.on('nuevo_mensaje', function(data){ const box = document.getElementById('chat-box'); const isMe = data.user === user; const d = document.createElement('div'); d.className = `flex ${isMe ? 'justify-end':'justify-start'}`; d.innerHTML = `<div class="${isMe?'bg-brand text-white rounded-l-[1.5rem] rounded-tr-[1.5rem] shadow-brand/20 shadow-md':'bg-white text-slate-700 rounded-r-[1.5rem] rounded-tl-[1.5rem] shadow-sm border border-slate-200'} px-6 py-3 max-w-[85%] animate-in fade-in slide-in-from-bottom-2"><p class="text-[10px] font-black uppercase mb-1 ${isMe?'text-blue-100':'text-slate-400'}">${data.user}</p><p class="text-sm font-medium leading-relaxed">${data.msg}</p></div>`; box.appendChild(d); box.scrollTop = box.scrollHeight; }); function send(){ const i = document.getElementById('msg-input'); if(i.value.trim()){ socket.emit('enviar_mensaje', {msg: i.value, room: room}); i.value=''; } }</script>{% endblock %}""",
-    'checkout.html': """{% extends "base.html" %}{% block content %}<div class="max-w-2xl mx-auto py-20 px-4 text-center"><div class="bg-white p-12 rounded-[2.5rem] shadow-2xl border border-slate-50"><h2 class="text-3xl font-black mb-8">Confirmar Pedido</h2><div class="bg-slate-50 p-6 rounded-3xl mb-8"><img src="{{ pub.imagen_url }}" class="w-48 h-48 rounded-[2rem] object-cover mx-auto mb-4"><h3 class="font-black">{{ pub.nombre }}</h3><p class="text-xs font-bold text-brand italic">Entrega en: {{ pub.direccion_exacta }}</p></div><form action="{{ url_for('procesar_transaccion', id=pub.id_oferta_insumo) }}" method="POST"><button class="w-full btn-medical py-5 rounded-[2rem] font-black text-2xl shadow-xl">Confirmar Solicitud</button></form></div></div>{% endblock %}""",
-    'register.html': register_template,
+    'checkout.html': checkout_template,
+    'login.html': """{% extends "base.html" %}{% block content %}<div class="max-w-md mx-auto py-20 px-4"><div class="bg-white p-10 rounded-[2.5rem] shadow-2xl border border-slate-100 text-center"><h2 class="text-3xl font-black mb-8">Bienvenido</h2><form method="POST" class="space-y-4"><input name="email" type="email" placeholder="Email" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none"><input name="password" type="password" placeholder="Pass" required class="w-full p-4 bg-slate-50 rounded-2xl outline-none"><button class="w-full btn-medical py-5 rounded-2xl font-black shadow-xl mt-4">Entrar</button></form></div></div>{% endblock %}""",
+    'search.html': """{% extends "base.html" %}{% block content %}<div class="max-w-7xl mx-auto py-10 px-4"><div class="flex flex-col lg:flex-row gap-10"><div class="lg:w-80"><div class="bg-white p-8 rounded-[2rem] shadow-sm border border-slate-100 sticky top-24"><h4 class="font-black text-slate-900 mb-6 uppercase tracking-widest text-xs">Filtros Avanzados</h4><form method="GET"><input name="q" placeholder="Buscar..." class="w-full p-3 bg-slate-50 border-none rounded-xl text-sm mb-4 outline-none focus:ring-2 focus:ring-brand"><button class="w-full btn-medical py-3 rounded-xl text-sm font-bold shadow-md">Aplicar</button></form></div></div><div class="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">{% for item in resultados %}<div class="bg-white rounded-[2rem] shadow-sm border border-slate-100 overflow-hidden hover:shadow-2xl transition-all group">{% if item.receta_url %}<div class="absolute z-20 top-2 left-2 bg-red-500 text-white text-[8px] px-2 py-1 rounded-full font-bold">RECETA OBLIGATORIA</div>{% endif %}<img src="{{ item.imagen_url }}" class="w-full h-56 object-cover group-hover:scale-105 transition-transform duration-500"><div class="p-6"><h3 class="font-black text-slate-800 text-xl">{{ item.nombre }}</h3><p class="text-[10px] text-brand font-bold uppercase mb-4 tracking-tighter">{{ item.categoria }}</p><div class="flex justify-between items-center"><span class="text-2xl font-black text-slate-900">{% if item.tipo_publicacion == 'Venta' %} ${{ item.precio }} {% else %} GRATIS {% endif %}</span><a href="{{ url_for('confirmar_compra', id=item.id_oferta_insumo) }}" class="w-12 h-12 bg-blue-50 text-brand rounded-2xl flex items-center justify-center hover:bg-brand hover:text-white transition-colors"><i class="fas fa-chevron-right"></i></a></div><p class="text-[9px] text-slate-400 mt-4"><i class="fas fa-location-dot"></i> {{ item.direccion_exacta[:40] }}...</p></div></div>{% endfor %}</div></div></div>{% endblock %}""",
+    'dashboard.html': """{% extends "base.html" %}{% block content %}<div class="max-w-7xl mx-auto py-12 px-4"><div class="flex justify-between items-end mb-12"><h1 class="text-5xl font-black text-slate-900 tracking-tighter">Bienvenido, <span class="text-brand">{{ current_user.nombre.split()[0] }}</span></h1></div><div class="grid grid-cols-1 lg:grid-cols-3 gap-10">{% if current_user.email == 'admin@lifelink.com' %}<div class="lg:col-span-3 bg-red-50 p-10 rounded-[2.5rem] border border-red-100 shadow-sm"><h3 class="text-2xl font-black text-red-700 mb-6 flex items-center gap-2"><i class="fas fa-shield-halved"></i> Panel Administrativo</h3><div class="grid grid-cols-1 md:grid-cols-2 gap-6">{% for ticket in tickets_admin %}<div class="bg-white p-6 rounded-3xl shadow-sm"><p class="text-[10px] font-black text-red-400 uppercase mb-1">DE: {{ ticket.usuario.nombre }}</p><h5 class="font-black text-slate-800 mb-2">{{ ticket.asunto }}</h5><p class="text-xs text-slate-500 mb-4">{{ ticket.mensaje }}</p><a href="mailto:{{ ticket.usuario.email }}" class="bg-brand text-white px-4 py-2 rounded-xl text-xs font-bold shadow-md">Responder</a></div>{% endfor %}</div></div>{% endif %}<div class="lg:col-span-2 space-y-8"><h4 class="text-xs font-black text-slate-400 uppercase tracking-widest">Coordinación de Insumos</h4>{% for s in solicitudes_recibidas %}<div class="bg-white p-8 rounded-[2rem] shadow-sm flex justify-between items-center group"><div><h5 class="font-black text-slate-800 text-xl">{{ s.publicacion.nombre }}</h5><p class="text-xs text-slate-400">Solicitado por: <b>{{ s.solicitante.nombre }}</b></p>{% if s.hospital_destino %}<p class="text-[10px] text-emerald-600 font-black mt-2 uppercase tracking-tighter">HOSPITAL: {{ s.hospital_destino }}</p>{% endif %}</div><a href="{{ url_for('chat', id_solicitud=s.id_solicitud) }}" class="btn-medical px-6 py-3 rounded-2xl font-black text-sm shadow-md">Abrir Chat</a></div>{% endfor %}</div></div></div>{% endblock %}""",
+    'chat.html': """{% extends "base.html" %}{% block content %}<div class="max-w-3xl mx-auto py-8 px-4 h-[75vh] flex flex-col"><div class="bg-white rounded-[2.5rem] shadow-2xl flex flex-col flex-1 overflow-hidden border border-slate-100"><div class="bg-brand p-6 text-white flex justify-between items-center shadow-lg"><div class="flex items-center gap-4"><h3 class="font-black leading-none italic">LifeLink Secure Line</h3></div><a href="{{ url_for('dashboard') }}"><i class="fas fa-times text-xl"></i></a></div><div class="flex-1 overflow-y-auto p-8 space-y-6 bg-slate-50/50" id="chat-box"></div><div class="p-6 bg-white border-t border-slate-100"><form onsubmit="event.preventDefault(); send();" class="flex gap-4"><input id="msg-input" placeholder="Mensaje..." class="flex-1 p-4 bg-slate-100 rounded-2xl border-none outline-none focus:ring-2 focus:ring-brand"><button class="bg-brand text-white w-14 h-14 rounded-2xl shadow-lg flex items-center justify-center"><i class="fas fa-paper-plane"></i></button></form></div></div></div><script>const socket = io(); const room = "{{ solicitud.id_solicitud }}"; const user = "{{ current_user.nombre }}"; socket.emit('join', {room: room}); socket.on('nuevo_mensaje', function(data){ const box = document.getElementById('chat-box'); const isMe = data.user === user; const d = document.createElement('div'); d.className = `flex ${isMe ? 'justify-end':'justify-start'}`; d.innerHTML = `<div class="${isMe?'bg-brand text-white rounded-l-[1.5rem] rounded-tr-[1.5rem] shadow-brand/20 shadow-md':'bg-white text-slate-700 rounded-r-[1.5rem] rounded-tl-[1.5rem] shadow-sm border border-slate-200'} px-6 py-3 max-w-[85%] animate-in fade-in slide-in-from-bottom-2"><p class="text-[10px] font-black uppercase mb-1 ${isMe?'text-blue-100':'text-slate-400'}">${data.user}</p><p class="text-sm font-medium leading-relaxed">${data.msg}</p></div>`; box.appendChild(d); box.scrollTop = box.scrollHeight; }); function send(){ const i = document.getElementById('msg-input'); if(i.value.trim()){ socket.emit('enviar_mensaje', {msg: i.value, room: room}); i.value=''; } }</script>{% endblock %}""",
     'perfil.html': """{% extends "base.html" %}{% block content %}<div class="max-w-3xl mx-auto py-20 px-4 text-center"><div class="w-32 h-32 bg-brand text-white text-5xl font-black rounded-[2.5rem] flex items-center justify-center mx-auto mb-6 shadow-2xl border-8 border-white">{{ current_user.nombre[0] | upper }}</div><h2 class="text-4xl font-black text-slate-800">{{ current_user.nombre }}</h2><p class="text-brand font-black uppercase tracking-widest text-xs mb-10">{{ current_user.tipo_sangre }} | {{ current_user.email }}</p><div class="grid grid-cols-2 gap-4 text-left"><div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100"><p class="text-xs text-slate-400 font-black mb-1">WhatsApp</p><p class="font-black text-slate-800">{{ current_user.telefono }}</p></div><div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-100"><p class="text-xs text-slate-400 font-black mb-1">Ciudad</p><p class="font-black text-slate-800">{{ current_user.ubicacion }}</p></div></div><div class="mt-16"><a href="{{ url_for('logout') }}" class="text-red-500 font-black text-sm uppercase underline">Cerrar Sesión</a></div></div>{% endblock %}"""
 })
 
@@ -465,7 +515,7 @@ def publicar():
         )
         db.session.add(p)
         db.session.commit()
-        flash("Publicación guardada y verificada.", "success")
+        flash("Publicación guardada y bajo revisión.", "success")
         return redirect(url_for('dashboard'))
     return render_template('publish.html')
 
@@ -485,10 +535,16 @@ def confirmar_compra(id):
 @login_required
 def procesar_transaccion(id):
     p = Publicacion.query.get_or_404(id)
-    s = Solicitud(id_solicitante=current_user.id_usuario, id_publicacion=p.id_oferta_insumo)
+    hosp = request.form.get('hospital', 'N/A')
+    s = Solicitud(
+        id_solicitante=current_user.id_usuario, 
+        id_publicacion=p.id_oferta_insumo,
+        hospital_destino=hosp,
+        motivo_medico=request.form.get('motivo', 'Urgencia médica')
+    )
     db.session.add(s)
     db.session.commit()
-    flash("Solicitud procesada con éxito.", "success")
+    flash("Solicitud procesada. El contacto ha sido habilitado.", "success")
     return redirect(url_for('dashboard'))
 
 @app.route('/dashboard')
@@ -523,7 +579,7 @@ def enviar_soporte():
     )
     db.session.add(t)
     db.session.commit()
-    flash("Ticket de soporte enviado. Revisaremos tu caso pronto.", "success")
+    flash("Consulta enviada a revisión técnica/legal.", "success")
     return redirect(url_for('soporte'))
 
 # Eventos de Socket.IO
