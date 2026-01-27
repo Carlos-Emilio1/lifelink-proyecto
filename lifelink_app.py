@@ -90,7 +90,7 @@ home_template = """
                     CONECTANDO <br><span class="text-brand">VIDAS.</span>
                 </h1>
                 <p class="text-xl text-slate-400 max-w-lg leading-relaxed mb-10 font-medium">
-                    Plataforma inteligente para la coordinación de insumos médicos, medicamentos y donaciones de sangre.
+                    Plataforma inteligente para la coordinación de insumos médicos, medicamentos y donaciones de sangre de forma profesional.
                 </p>
                 <div class="flex flex-wrap gap-5 sm:justify-center lg:justify-start">
                     <a href="{{ url_for('buscar') }}" class="btn-main px-12 py-5 font-black text-lg shadow-2xl">
@@ -117,10 +117,10 @@ home_template = """
 # 2. CONFIGURACIÓN DEL SERVIDOR
 # ==========================================
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 'lifelink_emergency_fix_2026'
+app.config['SECRET_KEY'] = 'lifelink_emergency_fix_2026_final'
 
-# FORZAMOS SQLITE PARA QUE NO USE LA URL ROTA DE RENDER
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database_v12_stable.db'
+# Sincronizado con el Pre-Deploy Command de Render: rm -f lifelink.db
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///lifelink.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
@@ -128,7 +128,7 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 class User(UserMixin, db.Model):
-    __tablename__ = 'users_v12'
+    __tablename__ = 'users_vfinal' # Nombre único para evitar colisiones
     id = db.Column(db.Integer, primary_key=True)
     nombre = db.Column(db.String(100), nullable=False)
     email = db.Column(db.String(100), unique=True, nullable=False)
@@ -141,9 +141,14 @@ app.jinja_loader = jinja2.DictLoader({
     'home.html': home_template,
     'login.html': """{% extends "base.html" %}{% block content %}<div class="max-w-md mx-auto py-24 px-4 text-center font-black uppercase italic"><div class="bg-white p-12 rounded-[3rem] shadow-2xl border border-slate-100"><h2>Acceder</h2><form method="POST" class="space-y-4 mt-8"><input name="email" type="email" placeholder="CORREO" required class="w-full p-4 bg-slate-50 rounded-xl border-none outline-none shadow-inner"><input name="password" type="password" placeholder="CONTRASEÑA" required class="w-full p-4 bg-slate-50 rounded-xl border-none outline-none shadow-inner"><button class="w-full btn-main py-5 rounded-[2rem] text-xl mt-4">Entrar</button></form></div></div>{% endblock %}""",
     'register.html': """{% extends "base.html" %}{% block content %}<div class="max-w-xl mx-auto py-16 px-4 uppercase font-black italic"><div class="bg-white p-12 rounded-[3rem] shadow-2xl border border-slate-50 text-center"><h2>Registro</h2><form method="POST" class="space-y-4 mt-8"><input name="nombre" placeholder="NOMBRE COMPLETO" required class="w-full p-4 bg-slate-50 rounded-xl border-none shadow-inner"><input name="email" type="email" placeholder="CORREO" required class="w-full p-4 bg-slate-50 rounded-xl border-none shadow-inner"><input name="password" type="password" placeholder="CONTRASEÑA" required class="w-full p-4 bg-slate-50 rounded-xl border-none shadow-inner"><button class="w-full btn-main py-6 rounded-[2rem] text-xl">Crear Cuenta</button></form></div></div>{% endblock %}""",
-    'dashboard.html': """{% extends "base.html" %}{% block content %}<div class="max-w-7xl mx-auto py-20 px-4 text-center font-black uppercase italic"><h1>Mi Panel</h1><p class="mt-4 text-slate-400 italic">Bienvenido Nodo: {{ current_user.nombre }}</p></div>{% endblock %}""",
-    'search.html': """{% extends "base.html" %}{% block content %}<div class="max-w-7xl mx-auto py-20 px-4 text-center font-black uppercase italic"><h1>Buscador Activo</h1><p class="mt-4 text-slate-400 italic">No hay registros en la nueva base de datos v12.</p></div>{% endblock %}"""
+    'dashboard.html': """{% extends "base.html" %}{% block content %}<div class="max-w-7xl mx-auto py-20 px-4 text-center font-black uppercase italic"><h1>Mi Panel</h1><p class="mt-4 text-slate-400 italic">Bienvenido: {{ current_user.nombre }}</p><div class="mt-20 p-20 border-4 border-dashed border-slate-100 rounded-[4rem] text-slate-200">Sistema Operativo.</div></div>{% endblock %}""",
+    'search.html': """{% extends "base.html" %}{% block content %}<div class="max-w-7xl mx-auto py-20 px-4 text-center font-black uppercase italic"><h1>Buscador Activo</h1><p class="mt-4 text-slate-400 italic">No hay registros en la red actualmente.</p></div>{% endblock %}"""
 })
+
+# --- ESTO ARREGLA EL ERROR DE GUNICORN ---
+# Se ejecuta al importar el archivo, asegurando que las tablas existan antes de atender peticiones
+with app.app_context():
+    db.create_all()
 
 # ==========================================
 # 3. RUTAS
@@ -185,6 +190,5 @@ def buscar(): return render_template('search.html')
 def dashboard(): return render_template('dashboard.html')
 
 if __name__ == '__main__':
-    with app.app_context():
-        db.create_all()
-    app.run(debug=False)
+    socketio = SocketIO(app, cors_allowed_origins="*", async_mode='eventlet')
+    socketio.run(app, debug=False)
