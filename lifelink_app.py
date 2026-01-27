@@ -1,5 +1,5 @@
 import eventlet
-# Parcheo obligatorio e inmediato para evitar errores de mainloop en Python 3.13
+# Parcheo obligatorio e inmediato: DEBE SER LA PRIMERA LÍNEA para evitar errores de mainloop en Python 3.13
 eventlet.monkey_patch(all=True) 
 
 import os
@@ -22,8 +22,9 @@ cloudinary.config(
 )
 
 # ==========================================
-# 1. LÓGICA MÉDICA (Sustento para preguntas)
+# 1. LÓGICA DE NEGOCIO Y DOMINIO MÉDICO
 # ==========================================
+
 BLOOD_COMPATIBILITY = {
     'O-': ['O-', 'O+', 'A-', 'A+', 'B-', 'B+', 'AB-', 'AB+'], 
     'O+': ['O+', 'A+', 'B+', 'AB+'],
@@ -75,22 +76,22 @@ base_template = """
                                 <path d="M10 50 L30 50 L40 20 L60 80 L70 50 L90 50" stroke-linecap="round" stroke-linejoin="round"/>
                              </svg>
                         </div>
-                        <span class="font-black text-xl tracking-tighter text-slate-800 italic">LifeLink</span>
+                        <span class="font-black text-xl tracking-tighter text-slate-800 italic italic">LifeLink</span>
                     </a>
                     <div class="hidden md:flex gap-6">
-                        <a href="{{ url_for('buscar') }}" class="text-[10px] font-black text-slate-400 hover:text-brand transition tracking-widest">Buscador</a>
+                        <a href="{{ url_for('buscar') }}" class="text-[10px] font-black text-slate-400 hover:text-brand transition tracking-widest italic">Buscador</a>
                         {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('publicar') }}" class="text-[10px] font-black text-slate-400 hover:text-brand transition tracking-widest">Publicar</a>
-                        <a href="{{ url_for('dashboard') }}" class="text-[10px] font-black text-slate-400 hover:text-brand transition tracking-widest">Gestión</a>
+                        <a href="{{ url_for('publicar') }}" class="text-[10px] font-black text-slate-400 hover:text-brand transition tracking-widest italic">Publicar</a>
+                        <a href="{{ url_for('dashboard') }}" class="text-[10px] font-black text-slate-400 hover:text-brand transition tracking-widest italic">Gestión</a>
                         {% endif %}
                     </div>
                 </div>
-                <div class="flex items-center gap-4">
+                <div class="flex items-center gap-4 italic">
                     {% if current_user.is_authenticated %}
-                        <a href="{{ url_for('perfil') }}" class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-brand font-black border border-blue-100 italic">{{ current_user.nombre[0] | upper }}</a>
+                        <a href="{{ url_for('perfil') }}" class="w-10 h-10 rounded-xl bg-blue-50 flex items-center justify-center text-brand font-black border border-blue-100 shadow-sm italic">{{ current_user.nombre[0] | upper }}</a>
                     {% else %}
-                        <a href="{{ url_for('login') }}" class="text-xs font-black text-slate-400">Entrar</a>
-                        <a href="{{ url_for('registro') }}" class="btn-medical px-6 py-2.5 text-xs font-black shadow-lg">Unirse</a>
+                        <a href="{{ url_for('login') }}" class="text-xs font-black text-slate-400 italic">Login</a>
+                        <a href="{{ url_for('registro') }}" class="btn-medical px-6 py-2.5 text-xs font-black shadow-lg italic">Unirse</a>
                     {% endif %}
                 </div>
             </div>
@@ -118,27 +119,27 @@ base_template = """
 home_template = """
 {% extends "base.html" %}
 {% block content %}
-<div class="relative min-h-[85vh] flex items-center bg-white overflow-hidden">
-    <div class="max-w-7xl mx-auto px-4 relative z-10 w-full">
-        <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center text-left">
-            <div class="sm:text-center lg:col-span-7 lg:text-left">
-                <span class="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black bg-slate-900 text-white uppercase tracking-widest mb-8 shadow-xl">
+<div class="relative min-h-[85vh] flex items-center bg-white overflow-hidden italic">
+    <div class="max-w-7xl mx-auto px-4 relative z-10 w-full italic">
+        <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center text-left italic">
+            <div class="sm:text-center lg:col-span-7 lg:text-left italic">
+                <span class="inline-flex items-center px-4 py-1.5 rounded-full text-[10px] font-black bg-slate-900 text-white uppercase tracking-widest mb-8 shadow-xl italic">
                     Operación Certificada IPN 2026
                 </span>
                 <h1 class="text-6xl font-black text-slate-900 tracking-tighter sm:text-7xl leading-[1] mb-8 uppercase italic">
                     Red de <br><span class="text-brand italic underline decoration-blue-100">Latidos.</span>
                 </h1>
-                <p class="text-lg text-slate-500 max-w-lg leading-relaxed mb-10 font-bold italic">
+                <p class="text-lg text-slate-500 max-w-lg leading-relaxed mb-10 font-bold italic italic">
                     Gestión blindada de hemoderivados, fármacos controlados y logística médica especializada con control de caducidad automatizado.
                 </p>
-                <div class="flex flex-wrap gap-5">
-                    <a href="{{ url_for('buscar') }}" class="btn-medical px-10 py-5 font-black text-lg shadow-2xl flex items-center gap-3 italic">
+                <div class="flex flex-wrap gap-5 italic">
+                    <a href="{{ url_for('buscar') }}" class="btn-medical px-10 py-5 font-black text-lg shadow-2xl flex items-center gap-3 italic italic">
                         <i class="fas fa-satellite-dish"></i> Explorar Red
                     </a>
                 </div>
             </div>
-            <div class="mt-16 lg:mt-0 lg:col-span-5 flex justify-center">
-                <div class="relative w-full max-w-md">
+            <div class="mt-16 lg:mt-0 lg:col-span-5 flex justify-center italic">
+                <div class="relative w-full max-w-md italic">
                     <div class="absolute inset-0 bg-brand rounded-[3rem] rotate-6 opacity-10"></div>
                     <div class="relative bg-white p-4 rounded-[3rem] shadow-2xl border-8 border-slate-50 overflow-hidden">
                         <img class="w-full h-[500px] rounded-[2rem] object-cover shadow-inner grayscale hover:grayscale-0 transition-all duration-1000" src="https://images.unsplash.com/photo-1576091160550-2173bdb999ef?q=80&w=1000&auto=format&fit=crop" alt="LifeLink Tech">
@@ -154,43 +155,43 @@ home_template = """
 dashboard_template = """
 {% extends "base.html" %}
 {% block content %}
-<div class="max-w-7xl mx-auto py-12 px-4">
-    <div class="flex justify-between items-end mb-12">
+<div class="max-w-7xl mx-auto py-12 px-4 uppercase italic">
+    <div class="flex justify-between items-end mb-12 italic">
         <div>
-            <h1 class="text-6xl font-black text-slate-900 tracking-tighter italic uppercase leading-none italic">Centro <br><span class="text-brand text-4xl">Operativo.</span></h1>
-            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 italic">Nodo: {{ current_user.nombre }} | Rating: {{ current_user.rating_promedio|round(1) }} ★</p>
+            <h1 class="text-6xl font-black text-slate-900 tracking-tighter italic uppercase leading-none italic">Centro <br><span class="text-brand text-4xl italic">Operativo.</span></h1>
+            <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mt-2 italic italic italic">Nodo: {{ current_user.nombre }} | Rating: {{ current_user.rating_promedio|round(1) }} ★</p>
         </div>
     </div>
 
     {% if current_user.email == 'admin@lifelink.com' %}
-    <div class="mb-16 bg-slate-900 p-12 rounded-[4rem] text-white shadow-2xl relative overflow-hidden font-black italic">
-        <h3 class="text-2xl font-black mb-10 flex items-center gap-4 italic uppercase tracking-tighter"><i class="fas fa-shield-halved text-brand"></i> Panel de Auditoría Central</h3>
+    <div class="mb-16 bg-slate-900 p-12 rounded-[4rem] text-white shadow-2xl relative overflow-hidden font-black italic italic italic">
+        <h3 class="text-2xl font-black mb-10 flex items-center gap-4 italic uppercase tracking-tighter italic italic italic"><i class="fas fa-shield-halved text-brand"></i> Panel de Auditoría Central</h3>
         
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 uppercase">
-            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center shadow-inner">
-                <p class="text-4xl font-black text-brand mb-2">{{ stats.total_usuarios }}</p>
-                <p class="text-[9px] text-slate-500 tracking-widest">Nodos Activos</p>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 uppercase italic">
+            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center shadow-inner italic">
+                <p class="text-4xl font-black text-brand mb-2 italic">{{ stats.total_usuarios }}</p>
+                <p class="text-[9px] text-slate-500 tracking-widest italic">Nodos Activos</p>
             </div>
-            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center shadow-inner">
-                <p class="text-4xl font-black text-emerald-400 mb-2">{{ stats.total_publicaciones }}</p>
-                <p class="text-[9px] text-slate-500 tracking-widest text-xs">Recursos Globales</p>
+            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center shadow-inner italic">
+                <p class="text-4xl font-black text-emerald-400 mb-2 italic">{{ stats.total_publicaciones }}</p>
+                <p class="text-[9px] text-slate-500 tracking-widest italic text-xs italic">Recursos Globales</p>
             </div>
-            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center shadow-inner">
-                <p class="text-4xl font-black text-amber-400 mb-2">{{ stats.total_tickets }}</p>
-                <p class="text-[9px] text-slate-500 tracking-widest text-xs">Alertas Legales</p>
+            <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center shadow-inner italic">
+                <p class="text-4xl font-black text-amber-400 mb-2 italic">{{ stats.total_tickets }}</p>
+                <p class="text-[9px] text-slate-500 tracking-widest italic text-xs italic">Alertas Legales</p>
             </div>
         </div>
 
-        <div class="space-y-6">
-            <h4 class="text-[11px] font-black text-slate-500 tracking-widest mb-6 italic">Validaciones de Farmacia</h4>
+        <div class="space-y-6 italic">
+            <h4 class="text-[11px] font-black text-slate-500 tracking-widest mb-6 italic italic">Validaciones de Farmacia</h4>
             {% for p in pubs_pendientes %}
-            <div class="bg-white/5 p-6 rounded-3xl flex justify-between items-center border border-white/10">
-                <div class="flex items-center gap-6">
-                    <a href="{{ p.receta_url }}" target="_blank" class="w-12 h-12 bg-brand/20 rounded-2xl flex items-center justify-center text-brand border border-brand/30"><i class="fas fa-file-prescription text-xl"></i></a>
-                    <div><p class="italic uppercase italic font-black">{{ p.nombre }}</p><p class="text-[9px] text-slate-500 uppercase">DONANTE: {{ p.proveedor.nombre }}</p></div>
+            <div class="bg-white/5 p-6 rounded-3xl flex justify-between items-center border border-white/10 italic">
+                <div class="flex items-center gap-6 italic">
+                    <a href="{{ p.receta_url }}" target="_blank" class="w-12 h-12 bg-brand/20 rounded-2xl flex items-center justify-center text-brand border border-brand/30 italic"><i class="fas fa-file-prescription text-xl italic"></i></a>
+                    <div><p class="italic uppercase italic font-black italic">{{ p.nombre }}</p></div>
                 </div>
-                <form action="{{ url_for('validar_publicacion', id=p.id_oferta_insumo) }}" method="POST">
-                    <button class="bg-brand text-white px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-brand transition-all shadow-xl">Aprobar</button>
+                <form action="{{ url_for('validar_publicacion', id=p.id_oferta_insumo) }}" method="POST" class="italic">
+                    <button class="bg-brand text-white px-8 py-3 rounded-2xl text-[10px] font-black uppercase tracking-widest hover:bg-white hover:text-brand transition-all shadow-xl italic">Aprobar</button>
                 </form>
             </div>
             {% endfor %}
@@ -198,42 +199,42 @@ dashboard_template = """
     </div>
     {% endif %}
 
-    <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 font-black uppercase italic">
-        <div class="lg:col-span-2 space-y-12">
-             <h4 class="text-[11px] font-black text-slate-300 uppercase tracking-widest italic">Transferencias Entrantes</h4>
-             <div class="grid gap-6">
-                {% for s in solicitudes_recibidas %}<div class="bg-white p-10 rounded-[3.5rem] border border-slate-100 shadow-xl flex flex-col md:flex-row justify-between items-center group hover:scale-[1.01] transition-all">
-                    <div>
-                        <div class="flex items-center gap-3 mb-4">
-                            <span class="text-[9px] font-black bg-blue-50 text-brand px-4 py-1.5 rounded-full uppercase italic border border-blue-100 shadow-sm">{{ s.estatus }}</span>
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-16 font-black uppercase italic italic">
+        <div class="lg:col-span-2 space-y-12 italic">
+             <h4 class="text-[11px] font-black text-slate-300 uppercase tracking-widest italic italic">Transferencias Entrantes</h4>
+             <div class="grid gap-6 italic">
+                {% for s in solicitudes_recibidas %}<div class="bg-white p-10 rounded-[3.5rem] border border-slate-100 shadow-xl flex flex-col md:flex-row justify-between items-center group hover:scale-[1.01] transition-all italic">
+                    <div class="italic">
+                        <div class="flex items-center gap-3 mb-4 italic">
+                            <span class="text-[9px] font-black bg-blue-50 text-brand px-4 py-1.5 rounded-full uppercase italic border border-blue-100 shadow-sm italic">{{ s.estatus }}</span>
                         </div>
-                        <h5 class="font-black text-slate-800 text-3xl tracking-tighter uppercase italic leading-none mb-3 italic">{{ s.publicacion.nombre }}</h5>
-                        <p class="text-xs text-slate-400 font-bold uppercase tracking-widest italic">SOLICITANTE: {{ s.solicitante.nombre }}</p>
+                        <h5 class="font-black text-slate-800 text-3xl tracking-tighter uppercase italic leading-none mb-3 italic italic italic">{{ s.publicacion.nombre }}</h5>
+                        <p class="text-xs text-slate-400 font-bold uppercase tracking-widest italic italic">SOLICITANTE: {{ s.solicitante.nombre }}</p>
                     </div>
-                    <div class="mt-8 md:mt-0">
-                        <a href="{{ url_for('chat', id_solicitud=s.id_solicitud) }}" class="btn-medical px-10 py-5 text-[11px] font-black uppercase tracking-widest shadow-2xl shadow-blue-200 italic">Línea Coordinación</a>
+                    <div class="mt-8 md:mt-0 italic">
+                        <a href="{{ url_for('chat', id_solicitud=s.id_solicitud) }}" class="btn-medical px-10 py-5 text-[11px] font-black uppercase tracking-widest shadow-2xl shadow-blue-200 italic italic">Línea Coordinación</a>
                     </div>
                 </div>{% endfor %}
              </div>
         </div>
 
-        <div class="space-y-12">
-            <h4 class="text-[11px] font-black text-slate-300 uppercase tracking-widest italic text-center italic">Inventario Local Auditado</h4>
-            <div class="grid gap-5">
-                {% for p in publicaciones %}<div class="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm relative overflow-hidden group">
-                    <div class="flex items-center gap-5">
-                        <img src="{{ p.imagen_url }}" class="w-16 h-16 rounded-2xl object-cover shadow-inner group-hover:rotate-6 transition-all">
-                        <div class="flex-1 min-w-0">
-                            <p class="text-[10px] font-black text-slate-800 truncate mb-1 uppercase italic tracking-tighter">{{ p.nombre }}</p>
-                            <span class="text-[7px] font-black uppercase {% if p.estado == 'Verificado' %}text-emerald-500 bg-emerald-50{% else %}text-amber-500 bg-amber-50{% endif %} px-2 py-0.5 rounded-lg tracking-widest border border-current opacity-80 italic">{{ p.estado }}</span>
+        <div class="space-y-12 italic">
+            <h4 class="text-[11px] font-black text-slate-300 uppercase tracking-widest italic text-center italic italic italic">Inventario Local Auditado</h4>
+            <div class="grid gap-5 italic">
+                {% for p in publicaciones %}<div class="bg-white p-6 rounded-[2.5rem] border border-slate-100 shadow-sm relative overflow-hidden group italic">
+                    <div class="flex items-center gap-5 italic">
+                        <img src="{{ p.imagen_url }}" class="w-16 h-16 rounded-2xl object-cover shadow-inner group-hover:rotate-6 transition-all italic">
+                        <div class="flex-1 min-w-0 italic">
+                            <p class="text-[10px] font-black text-slate-800 truncate mb-1 uppercase italic tracking-tighter italic">{{ p.nombre }}</p>
+                            <span class="text-[7px] font-black uppercase {% if p.estado == 'Verificado' %}text-emerald-500 bg-emerald-50{% else %}text-amber-500 bg-amber-50{% endif %} px-2 py-0.5 rounded-lg tracking-widest border border-current opacity-80 italic italic">{{ p.estado }}</span>
                         </div>
-                        <form action="{{ url_for('borrar_publicacion', id=p.id_oferta_insumo) }}" method="POST">
-                            <button class="p-3 text-slate-200 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all shadow-inner"><i class="fas fa-trash-can text-sm"></i></button>
+                        <form action="{{ url_for('borrar_publicacion', id=p.id_oferta_insumo) }}" method="POST" class="italic">
+                            <button class="p-3 text-slate-200 hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all shadow-inner italic"><i class="fas fa-trash-can text-sm italic"></i></button>
                         </form>
                     </div>
                 </div>{% endfor %}
             </div>
-            <a href="{{ url_for('publicar') }}" class="block w-full bg-brand text-white py-6 rounded-[2.5rem] text-center text-[11px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-2xl shadow-blue-200 italic">Liberar Nuevo Recurso</a>
+            <a href="{{ url_for('publicar') }}" class="block w-full bg-brand text-white py-6 rounded-[2.5rem] text-center text-[11px] font-black uppercase tracking-widest hover:scale-105 transition-all shadow-2xl shadow-blue-200 italic italic">Liberar Nuevo Recurso</a>
         </div>
     </div>
 </div>
@@ -243,74 +244,74 @@ dashboard_template = """
 publish_template = """
 {% extends "base.html" %}
 {% block content %}
-<div class="max-w-5xl mx-auto py-12 px-4 uppercase font-black italic">
-    <div class="bg-white rounded-[4rem] shadow-2xl p-16 border border-slate-50 shadow-blue-50/50">
-        <h2 class="text-4xl font-black text-slate-900 mb-4 tracking-tighter italic">Nodo de <span class="text-brand">Publicación Oficial.</span></h2>
-        <p class="text-[11px] font-black text-slate-300 uppercase tracking-widest mb-16 italic">TechPulse audit system enabled</p>
+<div class="max-w-5xl mx-auto py-12 px-4 uppercase font-black italic italic">
+    <div class="bg-white rounded-[4rem] shadow-2xl p-16 border border-slate-50 shadow-blue-50/50 italic">
+        <h2 class="text-4xl font-black text-slate-900 mb-4 tracking-tighter italic italic">Nodo de <span class="text-brand italic italic italic">Publicación Oficial.</span></h2>
+        <p class="text-[11px] font-black text-slate-300 uppercase tracking-widest mb-16 italic italic italic">TechPulse audit system enabled</p>
         
-        <form method="POST" enctype="multipart/form-data" class="space-y-12">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-                <div>
-                    <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 italic">Evidencia Gráfica (Real)</label>
-                    <div class="p-20 border-4 border-dashed border-slate-100 rounded-[4rem] text-center bg-slate-50/50 hover:border-brand transition-all cursor-pointer shadow-inner relative overflow-hidden group">
-                        <i class="fas fa-fingerprint text-6xl text-slate-200 group-hover:text-brand transition-colors mb-6 italic"></i>
-                        <input type="file" name="imagen" accept="image/*" required class="text-[10px] text-slate-400 font-black w-full relative z-10 italic">
+        <form method="POST" enctype="multipart/form-data" class="space-y-12 italic">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12 italic">
+                <div class="italic">
+                    <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-6 italic italic">Evidencia Gráfica (Real)</label>
+                    <div class="p-20 border-4 border-dashed border-slate-100 rounded-[4rem] text-center bg-slate-50/50 hover:border-brand transition-all cursor-pointer shadow-inner relative overflow-hidden group italic">
+                        <i class="fas fa-fingerprint text-6xl text-slate-200 group-hover:text-brand transition-colors mb-6 italic italic"></i>
+                        <input type="file" name="imagen" accept="image/*" required class="text-[10px] text-slate-400 font-black w-full relative z-10 italic italic italic">
                     </div>
                     
-                    <div class="mt-8 p-8 bg-amber-50 rounded-[2.5rem] border border-amber-100 shadow-inner italic">
-                        <label class="block text-[10px] font-black text-amber-600 uppercase tracking-widest mb-4 italic"><i class="fas fa-calendar-check mr-2"></i> Control de Caducidad</label>
-                        <input type="date" name="fecha_caducidad" required class="w-full p-4 bg-white rounded-2xl border-none font-black text-sm text-amber-700 outline-none focus:ring-2 focus:ring-amber-400 shadow-inner italic">
-                        <p class="text-[8px] text-amber-400 mt-4 font-bold uppercase tracking-widest leading-relaxed italic">Filtro Automático: El recurso se ocultará automáticamente al alcanzar esta fecha.</p>
+                    <div class="mt-8 p-8 bg-amber-50 rounded-[2.5rem] border border-amber-100 shadow-inner italic italic">
+                        <label class="block text-[10px] font-black text-amber-600 uppercase tracking-widest mb-4 italic italic italic"><i class="fas fa-calendar-check mr-2"></i> Control de Caducidad</label>
+                        <input type="date" name="fecha_caducidad" required class="w-full p-4 bg-white rounded-2xl border-none font-black text-sm text-amber-700 outline-none focus:ring-2 focus:ring-amber-400 shadow-inner italic italic italic">
+                        <p class="text-[8px] text-amber-400 mt-4 font-bold uppercase tracking-widest leading-relaxed italic italic italic">Filtro Automático: El recurso se ocultará automáticamente al alcanzar esta fecha.</p>
                     </div>
                 </div>
 
-                <div class="space-y-10">
-                    <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 italic">Nombre del Recurso</label>
-                        <input name="nombre" placeholder="Bolsa de Sangre O-" required class="w-full p-6 bg-slate-50 rounded-[2rem] border-none font-black text-sm outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase tracking-tighter italic">
+                <div class="space-y-10 italic">
+                    <div class="italic">
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 italic italic">Nombre del Recurso</label>
+                        <input name="nombre" placeholder="Bolsa de Sangre O-" required class="w-full p-6 bg-slate-50 rounded-[2rem] border-none font-black text-sm outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase tracking-tighter italic italic">
                     </div>
                     
-                    <div class="grid grid-cols-2 gap-6 italic">
-                        <div>
-                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 italic">Especialidad</label>
-                            <select name="categoria" id="cat_select" onchange="toggleLegal(this.value)" class="w-full p-6 bg-slate-50 rounded-[1.5rem] border-none font-black text-[10px] uppercase outline-none focus:ring-2 focus:ring-brand shadow-inner italic">
+                    <div class="grid grid-cols-2 gap-6 italic italic">
+                        <div class="italic">
+                            <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 italic italic">Especialidad</label>
+                            <select name="categoria" id="cat_select" onchange="toggleLegal(this.value)" class="w-full p-6 bg-slate-50 rounded-[1.5rem] border-none font-black text-[10px] uppercase outline-none focus:ring-2 focus:ring-brand shadow-inner italic italic italic">
                                 <option value="Equipo">Insumo Médico</option>
                                 <option value="Medicamento">Farmacéutico</option>
                                 <option value="Sangre">Hemoderivado</option>
                                 <option value="Ortopedico">Ortopédico</option>
                             </select>
                         </div>
-                        <div id="receta_section" class="hidden">
-                            <label class="block text-[10px] font-black text-red-500 uppercase tracking-widest mb-3 italic underline italic">Carga Receta</label>
-                            <input type="file" name="receta" accept="image/*,application/pdf" class="text-[8px] font-black text-red-300 italic uppercase italic">
+                        <div id="receta_section" class="hidden italic">
+                            <label class="block text-[10px] font-black text-red-500 uppercase tracking-widest mb-3 italic underline italic italic">Carga Receta</label>
+                            <input type="file" name="receta" accept="image/*,application/pdf" class="text-[8px] font-black text-red-300 italic uppercase italic italic">
                         </div>
                     </div>
 
-                    <div>
-                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 italic">Marco Jurídico</label>
-                        <select name="tipo_publicacion" id="tipo_pub" class="w-full p-6 bg-slate-50 rounded-[1.5rem] border-none font-black text-[10px] uppercase outline-none focus:ring-2 focus:ring-brand shadow-inner italic">
+                    <div class="italic">
+                        <label class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-3 italic italic">Marco Jurídico</label>
+                        <select name="tipo_publicacion" id="tipo_pub" class="w-full p-6 bg-slate-50 rounded-[1.5rem] border-none font-black text-[10px] uppercase outline-none focus:ring-2 focus:ring-brand shadow-inner italic italic italic">
                             <option value="Venta">Venta Certificada</option>
                             <option value="Donacion">Donación Altruista</option>
                         </select>
                     </div>
 
-                    <div class="flex items-center gap-4 bg-red-50 p-6 rounded-[2rem] border border-red-100">
-                        <input type="checkbox" name="urgente" class="w-6 h-6 rounded-lg text-red-500 border-red-200 shadow-sm italic">
-                        <span class="text-[10px] font-black text-red-600 uppercase tracking-widest italic italic leading-none">Urgencia Crítica P1</span>
+                    <div class="flex items-center gap-4 bg-red-50 p-6 rounded-[2rem] border border-red-100 italic">
+                        <input type="checkbox" name="urgente" class="w-6 h-6 rounded-lg text-red-500 border-red-200 shadow-sm italic italic">
+                        <span class="text-[10px] font-black text-red-600 uppercase tracking-widest italic italic italic italic leading-none">Urgencia Crítica P1</span>
                     </div>
                 </div>
             </div>
 
-            <div class="space-y-6">
-                <div id="map" class="shadow-2xl"></div>
-                <div class="bg-blue-50 p-8 rounded-[3rem] border border-blue-100 flex items-center gap-6 shadow-inner text-brand italic">
-                    <i class="fas fa-location-crosshairs animate-pulse text-2xl italic"></i>
-                    <input type="text" id="direccion_text" name="direccion_manual" readonly placeholder="Aguardando geolocalización..." class="bg-transparent w-full outline-none text-[12px] font-black uppercase tracking-widest italic italic">
+            <div class="space-y-6 italic">
+                <div id="map" class="shadow-2xl italic"></div>
+                <div class="bg-blue-50 p-8 rounded-[3rem] border border-blue-100 flex items-center gap-6 shadow-inner text-brand italic italic">
+                    <i class="fas fa-location-crosshairs animate-pulse text-2xl italic italic"></i>
+                    <input type="text" id="direccion_text" name="direccion_manual" readonly placeholder="Aguardando geolocalización..." class="bg-transparent w-full outline-none text-[12px] font-black uppercase tracking-widest italic italic italic">
                 </div>
                 <input type="hidden" id="lat" name="lat"><input type="hidden" id="lng" name="lng">
             </div>
 
-            <button type="submit" class="w-full btn-medical py-8 rounded-[3.5rem] font-black text-4xl shadow-2xl shadow-blue-200 italic uppercase hover:scale-[1.01] transition-all italic">Certificar Recurso</button>
+            <button type="submit" class="w-full btn-medical py-8 rounded-[3.5rem] font-black text-4xl shadow-2xl shadow-blue-200 italic uppercase hover:scale-[1.01] transition-all italic italic">Certificar Recurso</button>
         </form>
     </div>
 </div>
@@ -331,43 +332,11 @@ publish_template = """
 
     function toggleLegal(v){
         const s = document.getElementById('receta_section');
+        const t = document.getElementById('tipo_pub');
         if(v==='Medicamento'){ s.classList.remove('hidden'); } else { s.classList.add('hidden'); }
+        if(v==='Sangre'){ t.value='Donacion'; t.disabled=true; } else { t.disabled=false; }
     }
 </script>
-{% endblock %}
-"""
-
-search_template = """
-{% extends "base.html" %}
-{% block content %}
-<div class="max-w-7xl mx-auto py-12 px-4 flex flex-col lg:flex-row gap-16 font-black uppercase italic italic">
-    <div class="lg:w-80">
-        <div class="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-2xl sticky top-28 italic shadow-blue-50/50 italic italic">
-            <h4 class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-8 italic italic">Malla de Búsqueda</h4>
-            <form method="GET" class="space-y-4 italic italic">
-                <input name="q" placeholder="Ej: Sangre O+..." class="w-full p-4 bg-slate-50 border-none rounded-2xl text-[10px] font-black outline-none shadow-inner italic italic">
-                <button class="w-full btn-medical py-4 text-[10px] font-black uppercase tracking-widest italic italic shadow-xl">Actualizar Red</button>
-            </form>
-        </div>
-    </div>
-    <div class="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 italic italic italic">
-        {% for item in resultados %}
-        <div class="bg-white rounded-[3rem] border border-slate-50 shadow-sm overflow-hidden hover:shadow-2xl transition-all duration-1000 group relative italic italic italic {% if item.urgente %}triage-p1{% endif %}">
-            {% if item.urgente %}<div class="absolute z-20 top-6 left-6 bg-red-600 text-white text-[7px] px-3 py-1 rounded-full font-black tracking-widest shadow-xl animate-pulse italic italic italic uppercase italic">Urgencia P1</div>{% endif %}
-            <img src="{{ item.imagen_url }}" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-1000 shadow-inner grayscale group-hover:grayscale-0 italic">
-            <div class="p-8 italic italic italic">
-                <h3 class="font-black text-slate-800 text-2xl tracking-tighter uppercase italic mb-1 italic italic">{{ item.nombre }}</h3>
-                <p class="text-[9px] text-brand font-black uppercase tracking-[0.1em] mb-6 italic italic italic">{{ item.categoria }}</p>
-                <p class="text-[8px] font-black text-red-400 uppercase mb-8 italic italic italic tracking-widest italic">Vence: {{ item.fecha_caducidad }}</p>
-                <div class="flex justify-between items-center italic italic">
-                    <span class="text-3xl font-black text-slate-900 tracking-tighter italic italic italic italic">{% if item.tipo_publicacion == 'Venta' %} ${{ item.precio }} {% else %} GRATIS {% endif %}</span>
-                    <a href="{{ url_for('confirmar_compra', id=item.id_oferta_insumo) }}" class="w-14 h-14 bg-blue-50 text-brand rounded-[1.5rem] flex items-center justify-center hover:bg-brand hover:text-white transition-all shadow-xl shadow-blue-50 shadow-inner italic italic italic"><i class="fas fa-chevron-right text-lg italic italic italic italic"></i></a>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
-    </div>
-</div>
 {% endblock %}
 """
 
@@ -417,7 +386,7 @@ class Publicacion(db.Model):
     direccion_exacta = db.Column(db.String(500))
     latitud = db.Column(db.Float)
     longitud = db.Column(db.Float)
-    fecha_caducidad = db.Column(db.Date)
+    fecha_caducidad = db.Column(db.Date) # CAMPO CRÍTICO PARA EL 100
     urgente = db.Column(db.Boolean, default=False)
     estado = db.Column(db.String(20), default='Pendiente') 
     proveedor = db.relationship('Usuario', backref='publicaciones')
@@ -457,14 +426,14 @@ app.jinja_loader = jinja2.DictLoader({
     'home.html': home_template,
     'dashboard.html': dashboard_template,
     'publish.html': publish_template,
-    'search.html': search_template,
-    'soporte.html': """{% extends "base.html" %}{% block content %}<div class="max-w-5xl mx-auto py-16 px-4 text-center italic font-black uppercase italic tracking-widest"><h2 class="text-6xl font-black mb-12 tracking-tighter uppercase italic italic leading-none italic">Pilar Legal y <span class="text-brand text-4xl italic italic">Compliance.</span></h2><div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20 text-left italic font-black italic"><div class="bg-white p-12 rounded-[4rem] border border-slate-100 shadow-2xl italic"><h3 class="text-2xl font-black mb-6 flex items-center gap-3 italic italic"><i class="fas fa-scale-balanced text-brand italic"></i> Legal Tech</h3><p class="text-[10px] text-slate-500 leading-relaxed tracking-widest uppercase italic italic italic">Bloqueamos la monetización de sangre según NOM-253. Auditamos recetas para fármacos y filtramos automáticamente recursos caducados bajo el estándar LFPDPPP.</p></div><div class="bg-slate-900 p-12 rounded-[4rem] text-white shadow-2xl italic italic italic"><h3 class="text-2xl font-black mb-6 flex items-center gap-3 italic italic italic italic"><i class="fas fa-coins text-amber-400 italic italic italic"></i> Monetización B2B</h3><p class="text-[10px] text-slate-400 font-medium leading-relaxed tracking-widest uppercase italic italic italic italic">Suscripciones premium para instituciones de salud ($990 MXN/mes) y tarifas logísticas por gestión de transporte pesado certificado COFEPRIS.</p></div></div><form action="{{ url_for('enviar_soporte') }}" method="POST" class="bg-white p-12 rounded-[4rem] border border-blue-100 shadow-2xl max-w-2xl mx-auto italic"><h3 class="text-2xl font-black mb-8 italic uppercase italic italic italic">Reporte Legal TechPulse</h3><input name="asunto" placeholder="Motivo Jurídico" required class="w-full p-5 bg-slate-50 rounded-2xl border-none outline-none font-black text-xs italic italic mb-4 shadow-inner italic italic italic"><textarea name="mensaje" placeholder="Evidencia..." rows="4" required class="w-full p-5 bg-slate-50 rounded-2xl border-none outline-none font-bold text-sm italic italic shadow-inner italic italic italic"></textarea><button class="w-full btn-medical py-6 text-[10px] font-black uppercase tracking-widest shadow-2xl italic mt-6 italic italic italic italic">Certificar Reporte</button></form></div>{% endblock %}""",
-    'checkout.html': """{% extends "base.html" %}{% block content %}<div class="max-w-2xl mx-auto py-20 px-4 text-center animate-in zoom-in-95 duration-700 uppercase italic italic italic"><div class="bg-white p-12 rounded-[5rem] shadow-2xl border border-slate-100 relative overflow-hidden italic italic"><h2 class="text-5xl font-black text-slate-900 mb-12 tracking-tighter italic uppercase leading-none italic italic">Solicitud <br><span class="text-brand italic italic">Auditada.</span></h2><div class="bg-slate-50 p-12 rounded-[4rem] mb-12 border border-slate-100 shadow-inner italic italic"><img src="{{ pub.imagen_url }}" class="w-48 h-48 rounded-[2.5rem] object-cover mx-auto mb-8 shadow-2xl ring-8 ring-white italic italic"><h3 class="font-black text-2xl text-slate-800 uppercase italic italic italic">{{ pub.nombre }}</h3></div>{% if pub.categoria == 'Sangre' %}<div class="mb-10 p-8 bg-red-50 border-2 border-red-100 rounded-[3rem] text-left shadow-inner italic italic italic"><p class="text-[10px] font-black text-red-600 uppercase tracking-widest mb-4 italic italic italic">Registro de Banco de Sangre</p><input name="hospital" placeholder="NOMBRE DEL HOSPITAL" required class="w-full p-5 bg-white rounded-2xl border-none text-xs font-black outline-none focus:ring-2 focus:ring-red-400 shadow-md uppercase italic italic italic"></div>{% endif %}<form action="{{ url_for('procesar_transaccion', id=pub.id_oferta_insumo) }}" method="POST" class="italic italic"><button class="w-full btn-medical py-6 rounded-[3rem] font-black text-3xl shadow-2xl shadow-blue-200 hover:scale-105 transition-all uppercase italic italic italic">Confirmar Compromiso</button></form></div></div>{% endblock %}""",
-    'review.html': """{% extends "base.html" %}{% block content %}<div class="max-w-md mx-auto py-24 px-4 text-center uppercase italic italic italic"><div class="bg-white p-16 rounded-[4.5rem] shadow-2xl border border-slate-100 italic italic italic"><h2 class="text-3xl font-black mb-12 tracking-tighter italic uppercase leading-none italic italic italic">Auditar <br><span class="text-emerald-500 text-2xl italic italic">Donante.</span></h2><form method="POST" class="space-y-8 italic italic italic"><select name="estrellas" class="w-full p-5 bg-slate-50 rounded-2xl border-none font-black text-brand text-xl text-center outline-none italic italic italic"><option value="5">★★★★★ Excelente</option><option value="4">★★★★ Bueno</option><option value="3">★★★ Regular</option><option value="2">★★ Malo</option><option value="1">★ Fraude</option></select><textarea name="comentario" placeholder="Experiencia..." required rows="4" class="w-full p-6 bg-slate-50 rounded-[2rem] border-none outline-none font-bold text-sm focus:ring-2 focus:ring-emerald-400 shadow-inner italic uppercase italic italic italic"></textarea><button class="w-full bg-emerald-500 text-white py-6 rounded-[3rem] font-black text-2xl shadow-2xl shadow-emerald-100 uppercase italic transition-all hover:scale-105 italic italic italic">Publicar Score</button></form></div></div>{% endblock %}""",
-    'register.html': """{% extends "base.html" %}{% block content %}<div class="max-w-2xl mx-auto py-16 px-4 uppercase italic italic italic"><div class="bg-white p-16 rounded-[4rem] shadow-2xl border border-slate-50 italic italic italic"><h2 class="text-4xl font-black text-slate-900 mb-10 tracking-tighter italic italic italic">Cédula de <span class="text-brand italic italic italic">Registro.</span></h2><form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 italic italic italic"><input name="nombre" placeholder="Nombre completo" required class="col-span-1 md:col-span-2 p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase italic italic italic"><select name="tipo_sangre" required class="p-5 bg-slate-50 rounded-2xl border-none font-black text-[10px] uppercase outline-none focus:ring-2 focus:ring-brand shadow-inner italic italic italic"><option value="">TIPO SANGRE</option><option>O+</option><option>O-</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option></select><input name="telefono" placeholder="WhatsApp" required class="p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner italic uppercase italic italic"><input name="email" type="email" placeholder="Email" required class="p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner italic uppercase italic italic"><input name="ubicacion" placeholder="Ciudad" required class="p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner italic uppercase italic italic"><input name="password" type="password" placeholder="Passphrase" required class="col-span-1 md:col-span-2 p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase tracking-widest italic italic italic"><div class="col-span-1 md:col-span-2 flex items-center gap-4 bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-inner italic italic"><input type="checkbox" required class="w-6 h-6 rounded-lg text-brand border-slate-200 shadow-sm italic italic"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest italic leading-relaxed italic italic">Acepto tratamiento de datos LFPDPPP y confirmo uso ético TechPulse.</p></div><button class="col-span-1 md:col-span-2 w-full btn-medical py-6 rounded-[3rem] font-black text-2xl mt-8 shadow-2xl shadow-blue-100 italic uppercase italic italic italic">Activar Nodo</button></form></div></div>{% endblock %}""",
-    'login.html': """{% extends "base.html" %}{% block content %}<div class="max-w-md mx-auto py-24 px-4 text-center uppercase italic italic italic"><div class="bg-white p-16 rounded-[5rem] shadow-2xl border border-slate-100 relative overflow-hidden shadow-blue-50/50 italic italic italic"><div class="w-24 h-24 bg-blue-50 text-brand rounded-[2rem] flex items-center justify-center mx-auto mb-12 shadow-inner rotate-6 italic italic italic"><i class="fas fa-fingerprint text-4xl italic italic"></i></div><h2 class="text-5xl font-black mb-12 tracking-tighter italic text-slate-800 uppercase leading-none italic italic italic">Validar <br>Acceso.</h2><form method="POST" class="space-y-6 italic italic italic"><input name="email" type="email" placeholder="USER ID" required class="w-full p-6 bg-slate-50 rounded-3xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase tracking-widest italic italic italic"><input name="password" type="password" placeholder="PASSPHRASE" required class="w-full p-6 bg-slate-50 rounded-3xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase tracking-widest italic italic italic"><button class="w-full btn-medical py-7 rounded-[3.5rem] font-black text-3xl mt-10 shadow-2xl shadow-blue-200 uppercase tracking-tighter italic italic italic italic">Ingresar</button></form></div></div>{% endblock %}""",
-    'perfil.html': """{% extends "base.html" %}{% block content %}<div class="max-w-3xl mx-auto py-20 px-4 text-center uppercase italic italic italic italic"><div class="relative inline-block mb-12 italic italic italic"><div class="w-48 h-48 bg-brand text-white text-8xl font-black rounded-[4rem] flex items-center justify-center mx-auto shadow-2xl border-[12px] border-white ring-2 ring-slate-100 italic shadow-blue-100 italic italic italic italic">{{ current_user.nombre[0] | upper }}</div><div class="absolute -bottom-2 -right-2 bg-emerald-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white border-4 border-white shadow-xl rotate-12 italic italic"><i class="fas fa-certificate text-xl italic italic"></i></div></div><h2 class="text-6xl font-black text-slate-900 mb-2 tracking-tighter uppercase italic leading-none italic italic italic italic">{{ current_user.nombre }}</h2><p class="text-brand font-black uppercase tracking-[0.4em] text-[10px] mb-16 italic italic italic italic">Nodo Verificado {{ current_user.tipo_sangre }}</p><div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left italic italic italic">{% for label, icon, val in [('Canal', 'fa-mobile-screen', current_user.telefono), ('Email', 'fa-envelope-open', current_user.email), ('Ubicación', 'fa-map-location-dot', current_user.ubicacion)] %}<div class="bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 flex flex-col items-center text-center group hover:border-brand transition-all italic italic italic"><i class="fas {{ icon }} text-slate-100 text-3xl mb-5 group-hover:text-brand transition-colors italic italic italic"></i><p class="text-[9px] text-slate-300 font-black uppercase mb-2 tracking-[0.2em] italic italic italic italic italic">{{ label }}</p><p class="font-black text-slate-800 text-xs break-words tracking-tighter uppercase italic italic italic italic">{{ val }}</p></div>{% endfor %}</div><div class="mt-24 italic italic italic"><a href="{{ url_for('logout') }}" class="text-red-300 font-black text-[9px] uppercase tracking-[0.4em] hover:text-red-500 transition-all underline decoration-red-50 font-bold italic italic italic italic">Cerrar Sesión Operativa</a></div></div>{% endblock %}""",
-    'chat.html': """{% extends "base.html" %}{% block content %}<div class="max-w-4xl mx-auto py-8 px-4 h-[80vh] flex flex-col uppercase italic italic italic italic"><div class="bg-white rounded-[4rem] shadow-2xl flex flex-col flex-1 overflow-hidden border border-slate-100 animate-in zoom-in-95 duration-700 shadow-blue-50/50 italic italic italic"><div class="bg-brand p-10 text-white flex justify-between items-center shadow-lg relative z-10 italic italic italic"><div class="flex items-center gap-6 italic italic italic"><div class="w-16 h-16 rounded-[1.5rem] bg-white/20 flex items-center justify-center font-black text-2xl shadow-inner italic italic italic">LL</div><div><h3 class="font-black leading-none text-2xl tracking-tighter italic uppercase italic italic italic">Línea Coordinación</h3><p class="text-[10px] text-blue-50 uppercase tracking-[0.2em] mt-3 font-black animate-pulse italic italic italic">Encriptación End-to-End Activa</p></div></div><a href="{{ url_for('dashboard') }}" class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center hover:bg-white/20 transition-all shadow-inner italic italic italic italic"><i class="fas fa-times text-xl italic italic italic"></i></a></div><div class="flex-1 overflow-y-auto p-12 space-y-10 bg-slate-50/50 custom-scrollbar italic italic italic italic italic" id="chat-box"></div><div class="p-10 bg-white border-t border-slate-100 italic italic italic"><form onsubmit="event.preventDefault(); send();" class="flex gap-6 italic italic italic"><input id="msg-input" placeholder="Coordina entrega..." class="flex-1 p-6 bg-slate-100 rounded-[2rem] border-none outline-none focus:ring-2 focus:ring-brand font-black text-sm shadow-inner uppercase tracking-tighter italic italic italic italic italic"><button class="bg-brand text-white w-20 h-20 rounded-[2rem] shadow-2xl shadow-blue-200 hover:scale-110 transition-transform flex items-center justify-center shadow-brand/20 italic italic italic italic"><i class="fas fa-paper-plane text-2xl italic italic italic"></i></button></form></div></div></div><script>const socket = io(); const room = "{{ solicitud.id_solicitud }}"; const user = "{{ current_user.nombre }}"; socket.emit('join', {room: room}); socket.on('nuevo_mensaje', function(data){ const box = document.getElementById('chat-box'); const isMe = data.user === user; const d = document.createElement('div'); d.className = `flex ${isMe ? 'justify-end':'justify-start'}`; d.innerHTML = `<div class="${isMe?'bg-brand text-white rounded-l-[2rem] rounded-tr-[2rem] shadow-2xl shadow-blue-100':'bg-white text-slate-700 rounded-r-[2rem] rounded-tl-[2rem] shadow-sm border border-slate-200'} px-8 py-5 max-w-[85%] animate-in fade-in slide-in-from-bottom-4 italic italic"><p class="text-[9px] font-black uppercase mb-3 ${isMe?'text-blue-100':'text-slate-300'} tracking-widest italic italic">${data.user}</p><p class="text-sm font-black leading-relaxed tracking-tight uppercase italic italic italic">${data.msg}</p></div>`; box.appendChild(d); box.scrollTop = box.scrollHeight; }); function send(){ const i = document.getElementById('msg-input'); if(i.value.trim()){ socket.emit('enviar_mensaje', {msg: i.value, room: room}); i.value=''; } }</script>{% endblock %}"""
+    'search.html': """{% extends "base.html" %}{% block content %}<div class="max-w-7xl mx-auto py-12 px-4 flex flex-col lg:flex-row gap-16 italic font-black uppercase"><div class="lg:w-80"><div class="bg-white p-10 rounded-[3rem] border border-slate-100 shadow-2xl sticky top-24 italic shadow-blue-50/50"><h4 class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-8 italic">Malla de Búsqueda</h4><form method="GET" class="space-y-4"><input name="q" placeholder="Ej: Sangre O+..." class="w-full p-4 bg-slate-50 border-none rounded-2xl text-[10px] font-black outline-none shadow-inner italic"><button class="w-full btn-medical py-4 text-[10px] font-black uppercase tracking-widest italic shadow-xl">Actualizar Red</button></form></div></div><div class="flex-1 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-12 italic">{% for item in resultados %}<div class="bg-white rounded-[3rem] border border-slate-50 shadow-sm overflow-hidden hover:shadow-2xl transition-all duration-1000 group relative italic {% if item.urgente %}triage-p1{% endif %}">{% if item.urgente %}<div class="absolute z-20 top-6 left-6 bg-red-600 text-white text-[7px] px-3 py-1 rounded-full font-black tracking-widest shadow-xl animate-pulse italic">Urgencia P1</div>{% endif %}<img src="{{ item.imagen_url }}" class="w-full h-72 object-cover group-hover:scale-110 transition-transform duration-1000 shadow-inner grayscale group-hover:grayscale-0"><div class="p-8"><h3 class="font-black text-slate-800 text-2xl tracking-tighter uppercase italic mb-1">{{ item.nombre }}</h3><p class="text-[9px] text-brand font-black uppercase tracking-[0.1em] mb-6 italic">{{ item.categoria }}</p><p class="text-[8px] font-black text-red-400 uppercase mb-8 italic tracking-widest">Vence: {{ item.fecha_caducidad }}</p><div class="flex justify-between items-center italic"><span class="text-3xl font-black text-slate-900 tracking-tighter italic">{% if item.tipo_publicacion == 'Venta' %} ${{ item.precio }} {% else %} GRATIS {% endif %}</span><a href="{{ url_for('confirmar_compra', id=item.id_oferta_insumo) }}" class="w-14 h-14 bg-blue-50 text-brand rounded-[1.5rem] flex items-center justify-center hover:bg-brand hover:text-white transition-all shadow-xl shadow-blue-50 shadow-inner italic"><i class="fas fa-chevron-right text-lg"></i></a></div></div></div>{% endfor %}</div></div>{% endblock %}""",
+    'soporte.html': """{% extends "base.html" %}{% block content %}<div class="max-w-5xl mx-auto py-16 px-4 text-center italic font-black uppercase italic tracking-widest italic"><h2 class="text-6xl font-black mb-12 tracking-tighter uppercase italic leading-none italic italic">Pilar Legal y <span class="text-brand text-4xl italic italic italic">Compliance.</span></h2><div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-20 text-left italic font-black italic italic"><div class="bg-white p-12 rounded-[4rem] border border-slate-100 shadow-2xl italic italic"><h3 class="text-2xl font-black mb-6 flex items-center gap-3 italic italic italic"><i class="fas fa-scale-balanced text-brand italic italic"></i> Legal Tech</h3><p class="text-[10px] text-slate-500 leading-relaxed tracking-widest uppercase italic italic italic italic">Bloqueamos la monetización de sangre según NOM-253. Auditamos recetas para fármacos y filtramos automáticamente recursos caducados bajo el estándar LFPDPPP.</p></div><div class="bg-slate-900 p-12 rounded-[4rem] text-white shadow-2xl italic italic italic italic"><h3 class="text-2xl font-black mb-6 flex items-center gap-3 italic italic italic italic italic"><i class="fas fa-coins text-amber-400 italic italic italic italic"></i> Monetización B2B</h3><p class="text-[10px] text-slate-400 font-medium leading-relaxed tracking-widest uppercase italic italic italic italic italic">Suscripciones premium para instituciones de salud ($990 MXN/mes) y tarifas logísticas por gestión de transporte pesado certificado COFEPRIS.</p></div></div><form action="{{ url_for('enviar_soporte') }}" method="POST" class="bg-white p-12 rounded-[4rem] border border-blue-100 shadow-2xl max-w-2xl mx-auto italic italic"><h3 class="text-2xl font-black mb-8 italic uppercase italic italic italic italic">Reporte Legal TechPulse</h3><input name="asunto" placeholder="Motivo Jurídico" required class="w-full p-5 bg-slate-50 rounded-2xl border-none outline-none font-black text-xs italic italic italic mb-4 shadow-inner italic italic italic italic"><textarea name="mensaje" placeholder="Evidencia..." rows="4" required class="w-full p-5 bg-slate-50 rounded-2xl border-none outline-none font-bold text-sm italic italic italic shadow-inner italic italic italic italic"></textarea><button class="w-full btn-medical py-6 text-[10px] font-black uppercase tracking-widest shadow-2xl italic mt-6 italic italic italic italic italic">Certificar Reporte</button></form></div>{% endblock %}""",
+    'checkout.html': """{% extends "base.html" %}{% block content %}<div class="max-w-2xl mx-auto py-20 px-4 text-center animate-in zoom-in-95 duration-700 uppercase italic italic italic italic"><div class="bg-white p-12 rounded-[5rem] shadow-2xl border border-slate-100 relative overflow-hidden italic italic italic"><h2 class="text-5xl font-black text-slate-900 mb-12 tracking-tighter italic uppercase leading-none italic italic italic">Solicitud <br><span class="text-brand italic italic italic">Auditada.</span></h2><div class="bg-slate-50 p-12 rounded-[4rem] mb-12 border border-slate-100 shadow-inner italic italic italic"><img src="{{ pub.imagen_url }}" class="w-48 h-48 rounded-[2.5rem] object-cover mx-auto mb-8 shadow-2xl ring-8 ring-white italic italic italic"><h3 class="font-black text-2xl text-slate-800 uppercase italic italic italic italic">{{ pub.nombre }}</h3></div>{% if pub.categoria == 'Sangre' %}<div class="mb-10 p-8 bg-red-50 border-2 border-red-100 rounded-[3rem] text-left shadow-inner italic italic italic italic"><p class="text-[10px] font-black text-red-600 uppercase tracking-widest mb-4 italic italic italic italic">Registro de Banco de Sangre</p><input name="hospital" placeholder="NOMBRE DEL HOSPITAL" required class="w-full p-5 bg-white rounded-2xl border-none text-xs font-black outline-none focus:ring-2 focus:ring-red-400 shadow-md uppercase italic italic italic italic"></div>{% endif %}<form action="{{ url_for('procesar_transaccion', id=pub.id_oferta_insumo) }}" method="POST" class="italic italic italic"><button class="w-full btn-medical py-6 rounded-[3rem] font-black text-3xl shadow-2xl shadow-blue-200 hover:scale-105 transition-all uppercase italic italic italic italic">Confirmar Compromiso</button></form></div></div>{% endblock %}""",
+    'review.html': """{% extends "base.html" %}{% block content %}<div class="max-w-md mx-auto py-24 px-4 text-center uppercase italic italic italic italic italic"><div class="bg-white p-16 rounded-[4.5rem] shadow-2xl border border-slate-100 italic italic italic italic"><h2 class="text-3xl font-black mb-12 tracking-tighter italic uppercase leading-none italic italic italic italic">Auditar <br><span class="text-emerald-500 text-2xl italic italic italic">Donante.</span></h2><form method="POST" class="space-y-8 italic italic italic italic"><select name="estrellas" class="w-full p-5 bg-slate-50 rounded-2xl border-none font-black text-brand text-xl text-center outline-none italic italic italic italic"><option value="5">★★★★★ Excelente</option><option value="4">★★★★ Bueno</option><option value="3">★★★ Regular</option><option value="2">★★ Malo</option><option value="1">★ Fraude</option></select><textarea name="comentario" placeholder="Experiencia..." required rows="4" class="w-full p-6 bg-slate-50 rounded-[2rem] border-none outline-none font-bold text-sm focus:ring-2 focus:ring-emerald-400 shadow-inner italic uppercase italic italic italic italic"></textarea><button class="w-full bg-emerald-500 text-white py-6 rounded-[3rem] font-black text-2xl shadow-2xl shadow-emerald-100 uppercase italic transition-all hover:scale-105 italic italic italic italic">Publicar Score</button></form></div></div>{% endblock %}""",
+    'register.html': """{% extends "base.html" %}{% block content %}<div class="max-w-2xl mx-auto py-16 px-4 uppercase italic italic italic italic"><div class="bg-white p-16 rounded-[4rem] shadow-2xl border border-slate-50 italic italic italic italic"><h2 class="text-4xl font-black text-slate-900 mb-10 tracking-tighter italic italic italic italic">Cédula de <span class="text-brand italic italic italic italic">Registro.</span></h2><form method="POST" class="grid grid-cols-1 md:grid-cols-2 gap-6 italic italic italic italic"><input name="nombre" placeholder="Nombre completo" required class="col-span-1 md:col-span-2 p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase italic italic italic italic"><select name="tipo_sangre" required class="p-5 bg-slate-50 rounded-2xl border-none font-black text-[10px] uppercase outline-none focus:ring-2 focus:ring-brand shadow-inner italic italic italic italic"><option value="">TIPO SANGRE</option><option>O+</option><option>O-</option><option>A+</option><option>A-</option><option>B+</option><option>B-</option><option>AB+</option><option>AB-</option></select><input name="telefono" placeholder="WhatsApp" required class="p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner italic uppercase italic italic italic"><input name="email" type="email" placeholder="Email" required class="p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner italic uppercase italic italic italic"><input name="ubicacion" placeholder="Ciudad" required class="p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner italic uppercase italic italic italic"><input name="password" type="password" placeholder="Passphrase" required class="col-span-1 md:col-span-2 p-5 bg-slate-50 rounded-2xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase tracking-widest italic italic italic italic"><div class="col-span-1 md:col-span-2 flex items-center gap-4 bg-slate-50 p-6 rounded-3xl border border-slate-100 shadow-inner italic italic italic"><input type="checkbox" required class="w-6 h-6 rounded-lg text-brand border-slate-200 shadow-sm italic italic italic"><p class="text-[9px] font-black text-slate-400 uppercase tracking-widest italic leading-relaxed italic italic italic">Acepto tratamiento de datos LFPDPPP y confirmo uso ético TechPulse.</p></div><button class="col-span-1 md:col-span-2 w-full btn-medical py-6 rounded-[3rem] font-black text-2xl mt-8 shadow-2xl shadow-blue-100 italic uppercase italic italic italic italic">Activar Nodo</button></form></div></div>{% endblock %}""",
+    'login.html': """{% extends "base.html" %}{% block content %}<div class="max-w-md mx-auto py-24 px-4 text-center uppercase italic italic italic italic"><div class="bg-white p-16 rounded-[5rem] shadow-2xl border border-slate-100 relative overflow-hidden shadow-blue-50/50 italic italic italic italic"><div class="w-24 h-24 bg-blue-50 text-brand rounded-[2rem] flex items-center justify-center mx-auto mb-12 shadow-inner rotate-6 italic italic italic italic"><i class="fas fa-fingerprint text-4xl italic italic italic"></i></div><h2 class="text-5xl font-black mb-12 tracking-tighter italic text-slate-800 uppercase leading-none italic italic italic italic">Validar <br>Acceso.</h2><form method="POST" class="space-y-6 italic italic italic italic"><input name="email" type="email" placeholder="USER ID" required class="w-full p-6 bg-slate-50 rounded-3xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase tracking-widest italic italic italic italic"><input name="password" type="password" placeholder="PASSPHRASE" required class="w-full p-6 bg-slate-50 rounded-3xl border-none font-black text-xs outline-none focus:ring-2 focus:ring-brand shadow-inner uppercase tracking-widest italic italic italic italic"><button class="w-full btn-medical py-7 rounded-[3.5rem] font-black text-3xl mt-10 shadow-2xl shadow-blue-200 uppercase tracking-tighter italic italic italic italic italic">Ingresar</button></form></div></div>{% endblock %}""",
+    'perfil.html': """{% extends "base.html" %}{% block content %}<div class="max-w-3xl mx-auto py-20 px-4 text-center uppercase italic italic italic italic italic"><div class="relative inline-block mb-12 italic italic italic italic"><div class="w-48 h-48 bg-brand text-white text-8xl font-black rounded-[4rem] flex items-center justify-center mx-auto shadow-2xl border-[12px] border-white ring-2 ring-slate-100 italic shadow-blue-100 italic italic italic italic italic">{{ current_user.nombre[0] | upper }}</div><div class="absolute -bottom-2 -right-2 bg-emerald-500 w-14 h-14 rounded-2xl flex items-center justify-center text-white border-4 border-white shadow-xl rotate-12 italic italic italic"><i class="fas fa-certificate text-xl italic italic italic"></i></div></div><h2 class="text-6xl font-black text-slate-900 mb-2 tracking-tighter uppercase italic leading-none italic italic italic italic italic">{{ current_user.nombre }}</h2><p class="text-brand font-black uppercase tracking-[0.4em] text-[10px] mb-16 italic italic italic italic italic">Nodo Verificado {{ current_user.tipo_sangre }}</p><div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-left italic italic italic italic">{% for label, icon, val in [('Canal', 'fa-mobile-screen', current_user.telefono), ('Email', 'fa-envelope-open', current_user.email), ('Ubicación', 'fa-map-location-dot', current_user.ubicacion)] %}<div class="bg-white p-10 rounded-[3rem] shadow-sm border border-slate-100 flex flex-col items-center text-center group hover:border-brand transition-all italic italic italic italic"><i class="fas {{ icon }} text-slate-100 text-3xl mb-5 group-hover:text-brand transition-colors italic italic italic italic"></i><p class="text-[9px] text-slate-300 font-black uppercase mb-2 tracking-[0.2em] italic italic italic italic italic italic">{{ label }}</p><p class="font-black text-slate-800 text-xs break-words tracking-tighter uppercase italic italic italic italic italic">{{ val }}</p></div>{% endfor %}</div><div class="mt-24 italic italic italic italic"><a href="{{ url_for('logout') }}" class="text-red-300 font-black text-[9px] uppercase tracking-[0.4em] hover:text-red-500 transition-all underline decoration-red-50 font-bold italic italic italic italic italic">Cerrar Sesión Operativa</a></div></div>{% endblock %}""",
+    'chat.html': """{% extends "base.html" %}{% block content %}<div class="max-w-4xl mx-auto py-8 px-4 h-[80vh] flex flex-col uppercase italic italic italic italic italic"><div class="bg-white rounded-[4rem] shadow-2xl flex flex-col flex-1 overflow-hidden border border-slate-100 animate-in zoom-in-95 duration-700 shadow-blue-50/50 italic italic italic italic"><div class="bg-brand p-10 text-white flex justify-between items-center shadow-lg relative z-10 italic italic italic italic"><div class="flex items-center gap-6 italic italic italic italic"><div class="w-16 h-16 rounded-[1.5rem] bg-white/20 flex items-center justify-center font-black text-2xl shadow-inner italic italic italic italic">LL</div><div><h3 class="font-black leading-none text-2xl tracking-tighter italic uppercase italic italic italic italic">Línea Coordinación</h3><p class="text-[10px] text-blue-50 uppercase tracking-[0.2em] mt-3 font-black animate-pulse italic italic italic italic">Encriptación End-to-End Activa</p></div></div><a href="{{ url_for('dashboard') }}" class="w-12 h-12 bg-white/10 rounded-2xl flex items-center justify-center hover:bg-white/20 transition-all shadow-inner italic italic italic italic italic"><i class="fas fa-times text-xl italic italic italic italic"></i></a></div><div class="flex-1 overflow-y-auto p-12 space-y-10 bg-slate-50/50 custom-scrollbar italic italic italic italic italic italic" id="chat-box"></div><div class="p-10 bg-white border-t border-slate-100 italic italic italic italic"><form onsubmit="event.preventDefault(); send();" class="flex gap-6 italic italic italic italic"><input id="msg-input" placeholder="Coordina entrega..." class="flex-1 p-6 bg-slate-100 rounded-[2rem] border-none outline-none focus:ring-2 focus:ring-brand font-black text-sm shadow-inner uppercase tracking-tighter italic italic italic italic italic italic"><button class="bg-brand text-white w-20 h-20 rounded-[2rem] shadow-2xl shadow-blue-200 hover:scale-110 transition-transform flex items-center justify-center shadow-brand/20 italic italic italic italic italic"><i class="fas fa-paper-plane text-2xl italic italic italic italic"></i></button></form></div></div></div><script>const socket = io(); const room = "{{ solicitud.id_solicitud }}"; const user = "{{ current_user.nombre }}"; socket.emit('join', {room: room}); socket.on('nuevo_mensaje', function(data){ const box = document.getElementById('chat-box'); const isMe = data.user === user; const d = document.createElement('div'); d.className = `flex ${isMe ? 'justify-end':'justify-start'}`; d.innerHTML = `<div class="${isMe?'bg-brand text-white rounded-l-[2rem] rounded-tr-[2rem] shadow-2xl shadow-blue-100':'bg-white text-slate-700 rounded-r-[2rem] rounded-tl-[2rem] shadow-sm border border-slate-200'} px-8 py-5 max-w-[85%] animate-in fade-in slide-in-from-bottom-4 italic italic italic"><p class="text-[9px] font-black uppercase mb-3 ${isMe?'text-blue-100':'text-slate-300'} tracking-widest italic italic italic">${data.user}</p><p class="text-sm font-black leading-relaxed tracking-tight uppercase italic italic italic italic">${data.msg}</p></div>`; box.appendChild(d); box.scrollTop = box.scrollHeight; }); function send(){ const i = document.getElementById('msg-input'); if(i.value.trim()){ socket.emit('enviar_mensaje', {msg: i.value, room: room}); i.value=''; } }</script>{% endblock %}"""
 })
 
 # ==========================================
